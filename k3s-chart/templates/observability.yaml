@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-dashboard
+spec:
+  entryPoints:
+    - websecure
+
+  routes:
+    - match: Host(`{{ .Values.grafanaDashboardDomain }}`) && (PathPrefix(`/`)
+      kind: Rule
+      middlewares:
+        - name: traefik-forward-auth
+          namespace: kube-system
+      services:
+        - name: observability-grafana
+          namespace: observability
+  tls:
+    secretName: wildcard-tls

@@ -11,3 +11,4 @@ k3s.sh
 ssh-key-location.txt
 cluster-user.txt
 manfiests/k3s-chart/templates
+test

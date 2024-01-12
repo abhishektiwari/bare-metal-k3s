@@ -6,7 +6,7 @@ rm -R -f ../manfiests/k3s-chart
 # Generate manifests
 cd k3s-chart
 echo $PWD
-helm template --dry-run . | awk -vout=../manfiests -F": " '$0~/^# Source: /{file=out"/"$2; print "Creating "file; system ("mkdir -p $(dirname "file"); echo -n "" > "file)} $0!~/^#/ && $0!="---"{print $0 >> file}'
+helm template --dry-run . | awk -vout=../manfiests -F": " '$0~/^# Source: /{file=out"/"$2; print "Creating "file; system ("mkdir -p $(dirname "file"); echo --- "" > "file)} $0!~/^#/ && $0!="---"{print $0 >> file}'
 
 # Generate bash files
 cd ../bash-templates
@@ -24,3 +24,4 @@ bash  helm.sh>> ../kubectl.sh
 bash  certs.sh>> ../kubectl.sh
 bash  auth.sh>> ../kubectl.sh
 bash  apps.sh>> ../kubectl.sh
+bash  observability.sh>> ../kubectl.sh

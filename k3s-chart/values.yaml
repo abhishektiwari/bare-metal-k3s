@@ -1,4 +1,5 @@
 wildCardDomain: "*.d3ml.com"
 traefikAuthDomain: "auth.d3ml.com"
 traefikDashboardDomain: "traefik.d3ml.com"
+grafanaDashboardDomain: "grafana.d3ml.com"
 acmeEmail: "abhishek@abhishek-tiwari.com"
