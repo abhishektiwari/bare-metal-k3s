@@ -1,12 +1,31 @@
 rm -f init.sh
 rm -f k3s.sh
 rm -f kubectl.sh
-rm -R -f ../manfiests/k3s-chart
+rm -R -f ../manifests/k3s-chart
 
 # Generate manifests
 cd k3s-chart
 echo $PWD
-helm template --dry-run . | awk -vout=../manfiests -F": " '$0~/^# Source: /{file=out"/"$2; print "Creating "file; system ("mkdir -p $(dirname "file"); echo --- "" > "file)} $0!~/^#/ && $0!="---"{print $0 >> file}'
+
+# https://github.com/helm/helm/issues/4680
+# Based on https://github.com/helm/helm/issues/4680#issuecomment-613201032
+helm template --dry-run . | awk -vout=../manifests -F": " '
+  $0~/^# Source: / {
+    file=out"/"$2;
+    if (!(file in filemap)) {
+      filemap[file] = 1
+      print "Creating "file;
+      system ("mkdir -p $(dirname "file")");
+    }
+    print "---" >> file;
+  }
+  $0!~/^# Source: / {
+    if ($0!~/^---$/) {
+      if (file) {
+        print $0 >> file;
+      }
+    }
+  }'
 
 # Generate bash files
 cd ../bash-templates

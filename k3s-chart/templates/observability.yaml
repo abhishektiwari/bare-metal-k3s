@@ -3,18 +3,42 @@ apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: grafana-dashboard
+  namespace: observability
 spec:
   entryPoints:
     - websecure
 
   routes:
-    - match: Host(`{{ .Values.grafanaDashboardDomain }}`) && (PathPrefix(`/`)
+    - match: Host(`{{ .Values.grafanaDashboardDomain }}`)
       kind: Rule
       middlewares:
         - name: traefik-forward-auth
           namespace: kube-system
       services:
         - name: observability-grafana
-          namespace: observability
+          kind: Service
+          port: 80
+  tls:
+    secretName: wildcard-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: prometheus-dashboard
+  namespace: observability
+spec:
+  entryPoints:
+    - websecure
+
+  routes:
+    - match: Host(`{{ .Values.prometheusDashboardDomain }}`)
+      kind: Rule
+      middlewares:
+        - name: traefik-forward-auth
+          namespace: kube-system
+      services:
+        - name: observability-kube-prometh-prometheus
+          kind: Service
+          port: 9090
   tls:
     secretName: wildcard-tls
