@@ -1,0 +1,20 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+spec:
+  entryPoints:
+    - websecure
+
+  routes:
+    - match: Host(`{{ .Values.traefikDashboardDomain }}`) && (PathPrefix(`/`) || PathPrefix(`/api`))
+      kind: Rule
+      middlewares:
+        - name: traefik-forward-auth
+          namespace: kube-system
+      services:
+        - name: api@internal
+          kind: TraefikService
+  tls:
+    secretName: wildcard-tls

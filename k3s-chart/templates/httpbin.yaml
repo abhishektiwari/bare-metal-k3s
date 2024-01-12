@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations: {}
+  name: httpbin
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: httpbin
+  template:
+    metadata:
+      labels:
+        app: httpbin
+    spec:
+      containers:
+      - image: kennethreitz/httpbin
+        imagePullPolicy: Always
+        name: httpbin
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: httpbin-svc
+  namespace: default
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: httpbin
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpbin-ing
+  labels:
+    app: httpbin
+spec:
+  rules:
+    - host: httpbin.d3ml.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name:  httpbin-svc
+                port:
+                  number: 80
+          - path: /whoami
+            pathType: Exact
+            backend:
+              service:
+                name:  whoami-svc
+                port:
+                  number: 80
+  tls:
+  - hosts:
+    - "{{ .Values.wildCardDomain }}"
+    secretName: wildcard-tls

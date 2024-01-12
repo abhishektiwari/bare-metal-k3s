@@ -1,0 +1,13 @@
+kubeconfig
+cf-token.env
+cluster-ips.txt
+google-oidc-secrets.env
+google-oidc-config.env
+init.sh
+.DS_Store
+kubectl.sh
+init.sh
+k3s.sh
+ssh-key-location.txt
+cluster-user.txt
+manfiests/k3s-chart/templates
