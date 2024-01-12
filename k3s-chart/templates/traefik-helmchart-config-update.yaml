@@ -14,7 +14,12 @@ spec:
       - "--log.level=DEBUG"
     ports:
       traefik:
-        expose: true
+        expose: false
+      metrics:
+        # -- When using hostNetwork, use another port to avoid conflict with node exporter:
+        # https://github.com/prometheus/prometheus/wiki/Default-port-allocations
+        port: 9982
+        hostPort: 9982
     providers:
       kubernetesCRD:
         allowCrossNamespace: true
