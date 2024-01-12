@@ -28,6 +28,9 @@ See `example` files for your reference.
 * `google-oidc-config.env` [Required] - For Traefik Forward Auth to protect various dashboards including Traefik, Grafana, etc.
 * `google-oidc-secrets.env` [Required] - For Traefik Forward Auth to protect various dashboards including Traefik, Grafana, etc.
 
+## Update k3s-chart values
+Rename `example.values.yaml` to `values.yaml` and modify values according to your requirements. Basically this files needs a list of domain names and ACME contact email to provision Let's Encrypt Certificates.
+
 ## Generate user data file
 Execute `output.sh` which will create `init.sh`, `k3s.sh` and `kubectl.sh` scripts.
 
