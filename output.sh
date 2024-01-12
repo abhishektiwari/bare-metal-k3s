@@ -1,8 +1,7 @@
 rm -f init.sh
 rm -f k3s.sh
 rm -f kubectl.sh
-rm -R -f ../manifests/k3s-chart
-
+rm -R -f manifests/k3s-chart/templates
 # Generate manifests
 cd k3s-chart
 echo $PWD
@@ -27,6 +26,7 @@ helm template --dry-run . | awk -vout=../manifests -F": " '
     }
   }'
 
+touch ../manifests/k3s-chart/templates/.gitkeep
 # Generate bash files
 cd ../bash-templates
 echo $PWD
