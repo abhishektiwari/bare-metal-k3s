@@ -12,4 +12,5 @@ ssh-key-location.txt
 cluster-user.txt
 manifests/k3s-chart/templates
 test
+k3s-extra-args.txt
 k3s-chart/values.yaml
