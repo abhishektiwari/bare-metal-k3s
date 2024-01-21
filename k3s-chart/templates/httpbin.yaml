@@ -64,5 +64,5 @@ spec:
                   number: 80
   tls:
   - hosts:
-    - "{{ .Values.wildCardDomain }}"
-    secretName: wildcard-tls
+    - "{{ .Values.traefikDashboardDomain }}"
+    secretName: traefik-dashboard-tls

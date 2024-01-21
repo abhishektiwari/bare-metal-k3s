@@ -1,0 +1,52 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: auth-tls
+spec:
+  secretName: auth-tls
+  issuerRef: 
+    kind: ClusterIssuer
+    name: letsencrypt-acme-http01
+  commonName: "{{ .Values.traefikAuthDomain }}"
+  dnsNames:
+    - "{{ .Values.traefikAuthDomain }}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-dashboard-tls
+spec:
+  secretName: traefik-dashboard-tls
+  issuerRef: 
+    kind: ClusterIssuer
+    name: letsencrypt-acme-http01
+  commonName: "{{ .Values.traefikDashboardDomain }}"
+  dnsNames:
+    - "{{ Values.traefikDashboardDomain }}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-dashboard-tls
+spec:
+  secretName: grafana-dashboard-tls
+  issuerRef: 
+    kind: ClusterIssuer
+    name: letsencrypt-acme-http01
+  commonName: "{{ .Values.grafanaDashboardDomain }}"
+  dnsNames:
+    - "{{ Values.grafanaDashboardDomain }}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: prometheus-dashboard-tls
+spec:
+  secretName: prometheus-dashboard-tls
+  issuerRef: 
+    kind: ClusterIssuer
+    name: letsencrypt-acme-http01
+  commonName: "{{ .Values.prometheusDashboardDomain }}"
+  dnsNames:
+    - "{{ Values.prometheusDashboardDomain }}"

@@ -11,4 +11,4 @@ spec:
     - kind: Rule
       match: Host(`{{ .Values.traefikAuthDomain }}`)
   tls:
-    secretName: wildcard-tls
+    secretName: auth-tls
