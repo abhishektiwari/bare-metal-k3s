@@ -5,4 +5,4 @@ k3s-chart/values.yaml
 data/*
 !data/example.
 output/*
-output/.gitkeep
+!output/.gitkeep
