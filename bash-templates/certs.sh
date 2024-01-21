@@ -5,9 +5,12 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 kubectl -n cert-manager get pod
 
 # Apply manifests to create wildcard certs
-kubectl create secret generic cloudflare-api-token-secret --from-env-file=./data/cf-token.env -n cert-manager
-kubectl apply -f ./manifests/k3s-chart/templates/cloudflare-acme-dns01.yaml
-kubectl apply -f ./manifests/k3s-chart/templates/wildcard-tls-d3ml-com.yaml
+# kubectl create secret generic cloudflare-api-token-secret --from-env-file=./data/cf-token.env -n cert-manager
+# kubectl apply -f ../manifests/k3s-chart/templates/cloudflare-acme-dns01.yaml
+# kubectl apply -f ../manifests/k3s-chart/templates/wildcard-tls-d3ml-com.yaml
+# Apply manifests to create domain specific certs
+kubectl apply -f ../manifests/k3s-chart/templates/prod-acme-http01.yaml
+kubectl apply -f ../manifests/k3s-chart/templates/certifcates.yaml
 kubectl logs -l app=cert-manager -n cert-manager
 kubectl get certificates -A
 kubectl get clusterissuers -A

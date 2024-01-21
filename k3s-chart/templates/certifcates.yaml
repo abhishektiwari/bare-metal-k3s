@@ -23,7 +23,7 @@ spec:
     name: letsencrypt-acme-http01
   commonName: "{{ .Values.traefikDashboardDomain }}"
   dnsNames:
-    - "{{ Values.traefikDashboardDomain }}"
+    - "{{ .Values.traefikDashboardDomain }}"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -36,7 +36,7 @@ spec:
     name: letsencrypt-acme-http01
   commonName: "{{ .Values.grafanaDashboardDomain }}"
   dnsNames:
-    - "{{ Values.grafanaDashboardDomain }}"
+    - "{{ .Values.grafanaDashboardDomain }}"
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -49,4 +49,4 @@ spec:
     name: letsencrypt-acme-http01
   commonName: "{{ .Values.prometheusDashboardDomain }}"
   dnsNames:
-    - "{{ Values.prometheusDashboardDomain }}"
+    - "{{ .Values.prometheusDashboardDomain }}"
