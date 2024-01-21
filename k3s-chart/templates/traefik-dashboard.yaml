@@ -17,4 +17,4 @@ spec:
         - name: api@internal
           kind: TraefikService
   tls:
-    secretName: wildcard-tls
+    secretName: dashboards-tls

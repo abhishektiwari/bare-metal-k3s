@@ -65,4 +65,4 @@ spec:
   tls:
   - hosts:
     - "{{ .Values.httpbinDomain }}"
-    secretName: httpbin-tls
+    secretName: dashboards-tls
