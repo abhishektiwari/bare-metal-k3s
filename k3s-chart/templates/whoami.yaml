@@ -33,19 +33,3 @@ spec:
       targetPort: 80
   selector:
     app: whoami
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: whoami-ing
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Exact
-        backend:
-          service:
-            name: whoami-svc
-            port:
-              name: web
