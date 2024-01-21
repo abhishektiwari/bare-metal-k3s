@@ -2,13 +2,13 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-prod-http01
+  name: letsencrypt-acme-http01
 spec:
   acme:
     email: {{ .Values.acmeEmail }}
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: cloudflare-acme-http01-private-key
+      name: prod-acme-http01-private-key
     solvers:
      - http01:
          ingress:

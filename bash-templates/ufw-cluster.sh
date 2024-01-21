@@ -7,7 +7,7 @@ EOF
 for ip in `cat ../data/cluster-ips.txt`;
 do
 cat <<EOF
-sudo ufw sudo ufw allow from ${ip}
+sudo ufw allow from ${ip}
 EOF
 done
 cat <<EOF
