@@ -50,3 +50,16 @@ spec:
   commonName: "{{ .Values.prometheusDashboardDomain }}"
   dnsNames:
     - "{{ .Values.prometheusDashboardDomain }}"
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: httpbin-tls
+spec:
+  secretName: httpbin-tls
+  issuerRef: 
+    kind: ClusterIssuer
+    name: letsencrypt-acme-http01
+  commonName: "{{ .Values.httpbinDomain }}"
+  dnsNames:
+    - "{{ .Values.httpbinDomain }}"

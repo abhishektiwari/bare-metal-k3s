@@ -45,7 +45,7 @@ metadata:
     app: httpbin
 spec:
   rules:
-    - host: httpbin.d3ml.com
+    - host: "{{ .Values.httpbinDomain }}"
       http:
         paths:
           - path: /
@@ -64,5 +64,5 @@ spec:
                   number: 80
   tls:
   - hosts:
-    - "{{ .Values.traefikDashboardDomain }}"
-    secretName: traefik-dashboard-tls
+    - "{{ .Values.httpbinDomain }}"
+    secretName: httpbin-tls
